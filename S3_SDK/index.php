@@ -3,13 +3,15 @@ require_once 'controlador.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>S3Formulario</title>
 </head>
+
 <body>
-      <form action="" method="post">
+    <form action="" method="post">
         <fieldset>
             <legend>Crear Bucket</legend>
             <label for="nombre">Nombre</label>
@@ -22,7 +24,14 @@ require_once 'controlador.php';
             <legend>Subir objetos a Bucket</legend>
             <label for="bucket">Selecciona Bucket</label><br>
             <select name="bucket" id="bucket">
-
+                <!-- Recupero los Buckets desde el metodo obtenerBuckets -->
+                <?php
+                $awsS3 = new S3();
+                $buckets = $awsS3->obtenerBuckets();
+                foreach ($buckets as $b) {
+                    echo "<option>$b</option>";
+                }
+                ?>
             </select><br>
             <label for="objeto">Objeto</label><br>
             <input type="file" name="objeto" id="objeto" placeholder="Selecciona Fichero">
@@ -48,18 +57,19 @@ require_once 'controlador.php';
         </fieldset>
     </form>
     <div>
-        <?php 
-        if(isset($error)){
-            echo '<h3 style="color:red;">'.$error.'</h3>';
+        <?php
+        if (isset($error)) {
+            echo '<h3 style="color:red;">' . $error . '</h3>';
         }
         ?>
     </div>
     <div>
-        <?php 
-        if(isset($mensaje)){
-            echo '<h3 style="color:green;">'.$mensaje.'</h3>';
+        <?php
+        if (isset($mensaje)) {
+            echo '<h3 style="color:green;">' . $mensaje . '</h3>';
         }
         ?>
     </div>
 </body>
+
 </html>
