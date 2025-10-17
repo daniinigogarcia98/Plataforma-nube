@@ -31,6 +31,18 @@ if ($awsS3 != null) {
         } else {
             $error = '<h3 style="color:red;">Error:Debes rellenar el bucket y el objeto</h3>';
         }
+       
+    } elseif (isset($_POST['crearO'])) {
+          //Comprobar que se ha escrito algo en el textarea
+          if (!empty($_POST['texto']) &&!empty($_POST['bucket'])) {
+            if($awsS3->crearObjeto($_POST['bucket'],$_POST['texto'])){
+                $mensaje='<h3 style="color:green;">Objeto Creado</h3>';
+            }else{
+                 $error = '<h3 style="color:red;">Error al cargar objeto'.$error.'</h3>';
+            }
+          } else {
+            $error = '<h3 style="color:red;">Error:Debes rellenar el objeto</h3>';
+          }
     }
 } else {
     $error = '<h3 style="color:red;">No se puede Conectar con S3</h3>';

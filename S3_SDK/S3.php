@@ -76,4 +76,18 @@ class S3
         }
         return $resultado;
     }
+    public function crearObjeto($bucket,$texto){
+         $resultado = 'false';
+        try {
+             $this->conexion->putObject([
+                'Bucket'=>$bucket,
+                'Key'=>'fichero'.date('YmdHis').'.txt',
+                'Body'=>$texto
+            ]);
+        } catch (\Throwable $th) {
+            global  $error;
+            $error = $th->getMessage();
+        }
+        return $resultado;
+    }
 }
