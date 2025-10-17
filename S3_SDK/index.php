@@ -19,15 +19,13 @@ require_once 'controlador.php';
             <button type="submit" name="crearB">Crear Bucket</button>
         </fieldset>
     </form>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         <fieldset>
             <legend>Subir objetos a Bucket</legend>
             <label for="bucket">Selecciona Bucket</label><br>
             <select name="bucket" id="bucket">
-                <!-- Recupero los Buckets desde el metodo obtenerBuckets -->
                 <?php
-                $awsS3 = new S3();
-                $buckets = $awsS3->obtenerBuckets();
+                //insertar un option por cada buckets $buckets
                 foreach ($buckets as $b) {
                     echo "<option>$b</option>";
                 }
@@ -46,7 +44,12 @@ require_once 'controlador.php';
             <legend>Gestionar Objetos</legend>
             <label for="bucket">Selecciona Bucket</label><br>
             <select name="bucket" id="bucket">
-
+                <?php
+                //insertar un option por cada buckets $buckets
+                foreach ($buckets as $b) {
+                    echo "<option>$b</option>";
+                }
+                ?>
             </select><br>
             <label for="objeto">Selecciona Objeto</label><br>
             <select name="objeto" id="objeto">
