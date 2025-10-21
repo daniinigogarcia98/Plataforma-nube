@@ -59,31 +59,48 @@ class S3
         }
         return $resultado;
     }
-    public function cargarObjeto($bucket, $rutaObjeto,$nombreObjeto)
+    public function cargarObjeto($bucket, $rutaObjeto, $nombreObjeto)
     {
         $resultado = 'false';
         try {
             $this->conexion->putObject([
-                'Bucket'=>$bucket,
-                'Key'=>$nombreObjeto,
-                'SourceFile'=>$rutaObjeto,
-                'ContentType'=>mime_content_type($rutaObjeto)
+                'Bucket' => $bucket,
+                'Key' => $nombreObjeto,
+                'SourceFile' => $rutaObjeto,
+                'ContentType' => mime_content_type($rutaObjeto)
             ]);
-            $resultado='true';
+            $resultado = 'true';
         } catch (\Throwable $th) {
             global  $error;
             $error = $th->getMessage();
         }
         return $resultado;
     }
-    public function crearObjeto($bucket,$texto){
-         $resultado = 'false';
+    public function crearObjeto($bucket, $texto)
+    {
+        $resultado = 'false';
         try {
-             $this->conexion->putObject([
-                'Bucket'=>$bucket,
-                'Key'=>'fichero'.date('YmdHis').'.txt',
-                'Body'=>$texto
+            $this->conexion->putObject([
+                'Bucket' => $bucket,
+                'Key' => 'fichero' . date('YmdHis') . '.txt',
+                'Body' => $texto
             ]);
+        } catch (\Throwable $th) {
+            global  $error;
+            $error = $th->getMessage();
+        }
+        return $resultado;
+    }
+    public function obtenerObjetos($bucket)
+    {
+        $resultado = false;
+        try {
+            $r=$this->conexion->listObjectsV2([
+                'Bucket'=>$bucket
+            ]);
+            foreach($r['Contents']as $o){
+                $resultado[]=$o['Key'];
+            }
         } catch (\Throwable $th) {
             global  $error;
             $error = $th->getMessage();
