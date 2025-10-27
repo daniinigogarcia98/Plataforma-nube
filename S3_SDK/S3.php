@@ -93,7 +93,7 @@ class S3
     }
     public function obtenerObjetos($bucket)
     {
-        $resultado = false;
+        $resultado = array();
         try {
             $r=$this->conexion->listObjectsV2([
                 'Bucket'=>$bucket
@@ -101,6 +101,39 @@ class S3
             foreach($r['Contents']as $o){
                 $resultado[]=$o['Key'];
             }
+        } catch (\Throwable $th) {
+            global  $error;
+            $error = $th->getMessage();
+        }
+        return $resultado;
+    }
+     public function descargarObjetos($bucket,$objeto)
+    {
+        $resultado = null;
+        try {
+           $r=$this->conexion->getObject([
+            "Bucket"=>$bucket,
+            "Key"=>$objeto
+           ]);
+           if(isset($r['Body'])){
+            $resultado ['tipo'] =$r['ContentType'];
+            $resultado ['contenido'] =$r['Body'];
+           }
+        } catch (\Throwable $th) {
+            global  $error;
+            $error = $th->getMessage();
+        }
+        return $resultado;
+    }
+     public function borrarObjetos($bucket,$objeto)
+    {
+        $resultado = false;
+        try {
+            $r=$this->conexion->deleteObject([
+                "Bucket"=>$bucket,
+                "Key"=>$objeto
+            ]);
+            $resultado=true;
         } catch (\Throwable $th) {
             global  $error;
             $error = $th->getMessage();

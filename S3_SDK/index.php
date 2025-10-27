@@ -47,20 +47,17 @@ require_once 'controlador.php';
                 <?php
                 //insertar un option por cada buckets $buckets
                 foreach ($buckets as $b) {
-                    echo "<option>$b</option>";
+                    echo "<option " . rellenarSeleccionado($b) . ">" . $b . "</option>";
                 }
                 ?>
             </select><br>
             <label for="objeto">Selecciona Objeto</label><br>
-            <?php
-            $objetos = []; 
-
-            if (isset($_POST['bucket']) || isset($buckets[0])) {
-                $bucket = isset($_POST['bucket']) ? $_POST['bucket'] : $buckets[0];
-                $result = $awsS3->obtenerObjetos($bucket);
-                if (is_array($result)) {
-                    $objetos = $result;
-                }
+           <?php 
+            if(isset($_POST['bucket'])||isset($buckets[0])){
+                $objetos = $awsS3->obtenerObjetos((isset($_POST['bucket'])?$_POST['bucket']:$buckets[0]));
+            }
+            else{
+                $objetos=array();
             }
             ?>
             <select name="objeto" id="objeto">
@@ -76,6 +73,20 @@ require_once 'controlador.php';
         </fieldset>
     </form>
     <div>
+        <!-- Objeto de S3 si hemos dado ver/descargar -->
+        <div>
+            <?php
+            if (!empty($datos)) {
+               if (strpos($datos['tipo'],'image/')===0) {
+                    $contenido=base64_encode($datos['contenido']);
+                   echo '<img src="data:'.$datos['tipo'].';base64,'.$contenido.'">';
+                }
+                else{
+                     echo $datos['contenido'];
+                }
+            }
+            ?>
+        </div>
         <?php
         if (isset($error)) {
             echo '<h3 style="color:red;">' . $error . '</h3>';

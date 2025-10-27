@@ -1,5 +1,14 @@
 <?php
+
+use function PHPSTORM_META\elementType;
+
 require_once 'S3.php';
+
+function rellenarSeleccionado($bucket){
+    if (isset($_POST['bucket']) && $_POST['bucket']==$bucket) {
+        return 'selected';
+    }
+}
 //Crear Conexión con S3
 $awsS3 = new S3();
 
@@ -41,9 +50,35 @@ if ($awsS3 != null) {
                  $error = '<h3 style="color:red;">Error al cargar objeto'.$error.'</h3>';
             }
           } else {
-            $error = '<h3 style="color:red;">Error:Debes rellenar el objeto</h3>';
+            $error = '<h3 style="color:red;">Error:Debes rellenar el texto</h3>';
           }
+         
     }
+     elseif (isset($_POST['descargarO'])){
+        if(isset($_POST['bucket']) && isset($_POST['objeto'])){
+            $datos=$awsS3->descargarObjetos($_POST['bucket'],$_POST['objeto']);
+            if($datos==null){
+                $error='No se ha encontado el objeto';
+            }
+            
+        }else{
+                $error='Rellena bucket y objeto';
+            }
+
+     } elseif (isset($_POST['borrarO'])){
+        if(isset($_POST['bucket']) && isset($_POST['objeto'])){
+            if($awsS3->borrarObjetos($_POST['bucket'],$_POST['objeto'])){
+                 $mensaje='Objeto borrado';
+            }else{
+             $error='Error al borrar Objeto';
+           
+        }
+        }else{
+            $error='Rellena bucket y objeto';
+        }
+       
+     } 
+     
 } else {
     $error = '<h3 style="color:red;">No se puede Conectar con S3</h3>';
 }
