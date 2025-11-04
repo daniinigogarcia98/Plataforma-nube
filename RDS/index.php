@@ -7,7 +7,9 @@
 </head>
 <body>
     <h1>Gestion de Tareas</h1>
-    <form action="" method="post">
+    <fieldset>
+        <legend>Gestion de Tareas</legend>
+         <form action="" method="post">
         <label>Título <input type="text" name="titulo" placeholder="Título"></label><br><br>
         <label>Descripción <input type="text" name="descripcion" placeholder="Descripción"></label><br><br>
         <label>Prioridad <select name="prioridad">
@@ -21,5 +23,7 @@
             <option>Completada</option>
         </select></label><br><br>
     </form>
+    </fieldset>
+   
 </body>
 </html>

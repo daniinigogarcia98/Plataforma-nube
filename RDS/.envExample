@@ -1,0 +1,6 @@
+
+HOST=url o ip del servidor de BD
+PORT=3306 o el que hayas configurado
+DATABASE=nombreBD
+USERNAME=UsuariodeBD
+PS=ContraseñaBD
