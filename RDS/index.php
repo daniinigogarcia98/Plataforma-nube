@@ -2,7 +2,7 @@
 require_once 'Bd.php';
 $ad = new Bd();
 if ($ad->getConexion() != null) {
-    echo 'Se estableció conexión con la base de datos.';
+   echo "<h1 style='color: green;'>Se estableció conexión con la base de datos.</h1>";
 }
 ?>
 <!DOCTYPE html>

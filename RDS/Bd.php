@@ -6,14 +6,19 @@ class Bd {
         try {
             $env = $this->obtenerDatos();
             if ($env != null) {
-                // Establecer conexión con la base de datos
-                $this->conexion = new PDO(
+                try {
+                    // Establecer conexión con la base de datos
+                     $this->conexion = new PDO(
                     'mysql:host=' . $env['HOST'] .
                     ';port=' . $env['PORT'] . ';dbname=' . $env['DATABASE'],
                     $env['USERNAME'],
                     $env['PS']
                 );
-                echo "Se estableció conexión con la base de datos.";
+                } catch (PDOException $e) {
+                    echo $e->getMessage();
+                }
+               
+               
             }
         } catch (\Throwable $th) {
             echo $th->getMessage();
