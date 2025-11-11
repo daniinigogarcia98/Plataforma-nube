@@ -1,9 +1,5 @@
-<?php
-require_once 'Bd.php';
-$ad = new Bd();
-if ($ad->getConexion() != null) {
-   echo "<h1 style='color: green;'>Se estableció conexión con la base de datos.</h1>";
-}
+<?php 
+require_once 'controlador.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,6 +26,22 @@ if ($ad->getConexion() != null) {
             <option>Completada</option>
         </select></label><br><br>
     </form>
+    <?php 
+    if(isset($error)){
+        echo '<div style="color:red">';
+        foreach($error  as $e){
+            echo '<h3>'.$e.'<h3>';
+        }
+        echo '</div>';
+    }
+     if(isset($mensaje)){
+        echo '<div style="color:green">';
+        foreach($mensaje  as $m){
+            echo '<h3>'.$m.'<h3>';
+        }
+        echo '</div>';
+    }
+    ?>
     </fieldset>
    
 </body>
