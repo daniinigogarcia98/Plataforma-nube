@@ -57,5 +57,38 @@ class Bd{
         }
         return $resultado;
     }
+
+    public function crearTarea(Tarea $t){
+        $resultado=false;
+        try {
+            $consulta=$this->conexion->prepare('INSERT into tareas values(default,?,?,now(),?,?)');
+            $params=array($t->getTitulo(),$t->getDescripcion(),$t->getPrioridad(),$t->getEstado());
+            if($consulta->execute($params) && $consulta->rowCount()== 1){
+                $t->setId($this->conexion->lastInsertId());
+                $resultado=true;
+            }
+        } catch (\Throwable $th) {
+            global $error;
+            $error[]=$th->getMessage();
+        }
+        return $resultado;
+    }
+    public function obtenerTareas(){
+       $resultado = array();
+        try {
+           $consulta = $this->conexion->query('SELECT * from tareas');
+           while($fila=$consulta->fetch()){
+                $resultado[] = new Tarea($fila['id'],$fila['titulo'],$fila['descripcion'],
+                //Convertimos la fecha de sql que viene como string a formato long y después damos el formato con date
+                date('d/m/Y H:i:s',strtotime($fila['fechaC'])), 
+                $fila['prioridad'],$fila['estado']);
+           }
+        } catch (\Throwable $th) {
+            //throw $th;
+           global $error;
+           $error[]=$th->getMessage();
+        }
+        return $resultado;
+    }
 }
 ?>

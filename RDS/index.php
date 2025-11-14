@@ -9,7 +9,8 @@ require_once 'controlador.php';
     <title>Tareas</title>
 </head>
 <body>
-    <h1>Gestion de Tareas</h1>
+    <div class="container">
+         <h1>Gestion de Tareas</h1>
     <fieldset>
         <legend>Gestion de Tareas</legend>
          <form action="" method="post">
@@ -25,6 +26,39 @@ require_once 'controlador.php';
             <option>En Proceso</option>
             <option>Completada</option>
         </select></label><br><br>
+        <button type="submit" name="crear">+</button>
+    </form>
+     <form action="" method="post">
+        <table border="1">
+            <tr>
+                <th>Id</th>
+                <th>Título</th>
+                <th>Descripción</th>
+                <th>Fecha Creción</th>
+                <th>Prioridad</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+            <p></p>
+            <?php 
+                $tareas = $bd->obtenerTareas();
+                foreach($tareas as $t){
+                    echo '<tr>';
+                    echo '<td>'.$t->getId().'</td>';
+                    echo '<td>'.$t->getTitulo().'</td>';
+                    echo '<td>'.$t->getDescripcion().'</td>';
+                    echo '<td>'.$t->getFechaC().'</td>';
+                    echo '<td>'.$t->getPrioridad().'</td>';
+                    echo '<td>'.$t->getEstado().'</td>';
+                    echo '<td>
+                    <button type="submit" name="empezar"'.($t->getEstado()!='pendiente' || $t->getEstado()=='completada'?'style="display:none"':'').'>Empezar</button>
+                    <button type="submit" name="terminar"'.($t->getEstado()!='en proceso' || $t->getEstado()=='completada'?'style="display:none"':'').'>Terminar</button>
+                    <button type="submit" name="borrar">Borrar</button>
+                    </td>';
+                    echo '</tr>';
+                }
+            ?>
+        </table>
     </form>
     <?php 
     if(isset($error)){
@@ -43,6 +77,8 @@ require_once 'controlador.php';
     }
     ?>
     </fieldset>
+    </div>
+   
    
 </body>
 </html>
