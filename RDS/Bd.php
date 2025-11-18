@@ -90,5 +90,40 @@ class Bd{
         }
         return $resultado;
     }
+
+     public function cambiarEstado($id,$nuevoEstado){
+       $resultado = array();
+        try {
+           $consulta = $this->conexion->prepare('UPDATE tareas set estado =? where id=?');
+           $params=array($nuevoEstado,$id);
+           if($consulta->execute($params) && $consulta->rowCount()== 1){
+            $resultado = true;
+           }
+          
+        } catch (\Throwable $th) {
+            //throw $th;
+           global $error;
+           $error[]=$th->getMessage();
+        }
+        return $resultado;
+    }
+
+      public function borrar($id){
+       $resultado = array();
+        try {
+           $consulta = $this->conexion->prepare('DELETE from tareas where id=?');
+           $params=array($id);
+           if($consulta->execute($params) && $consulta->rowCount()== 1){
+            $resultado = true;
+           }
+          
+        } catch (\Throwable $th) {
+            //throw $th;
+           global $error;
+           $error[]=$th->getMessage();
+        }
+        return $resultado;
+    }
+
 }
 ?>

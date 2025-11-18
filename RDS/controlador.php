@@ -29,6 +29,30 @@ else{
             }
         }
    }
+   elseif((isset($_POST['empezar']))){
+    if($bd->cambiarEstado($_POST['empezar'],'en proceso')){
+        $mensaje[]= 'Tarea en proceso';
+    }
+    else{
+        $error[]='Error al comenzar la tarea';
+    }
+   }
+    elseif((isset($_POST['terminar']))){
+          if($bd->cambiarEstado($_POST['terminar'],'completada')){
+        $mensaje[]= 'Tarea finalizada';
+    }
+    else{
+        $error[]='Error al finalizar la tarea';
+    }
+   }
+    elseif((isset($_POST['borrar']))){
+          if($bd->borrar($_POST['borrar'])){
+        $mensaje[]= 'Tarea borrar';
+    }
+    else{
+        $error[]='Error al borrar la tarea';
+    }
+   }
 }
 
 ?>
