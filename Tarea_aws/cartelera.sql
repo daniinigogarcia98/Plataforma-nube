@@ -8,11 +8,11 @@ create table peliculas(
 	director varchar(100) not null,
     actor varchar(100) not null,
 	S3Fotos varchar(255),
-    año varchar(100) not null,
+    anio varchar(100) not null,
     genero varchar(100) not null,
     formato enum('Streaming','Digital','DVD') not null default 'Streaming'
 )engine innodb;
 
 insert into peliculas values(
-default,'Bad Boys: Ride or Die',' Adil El Arbi, Bilall Fallah','Will Smith',null,'2024','Acción/Comedia','Streaming'
+    default,'Bad Boys: Ride or Die','Adil El Arbi, Bilall Fallah','Will Smith',null,'2024-05-22','Acción/Comedia','Streaming'
 );
