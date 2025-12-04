@@ -14,5 +14,5 @@ create table peliculas(
 )engine innodb;
 
 insert into peliculas values(
-    default,'Bad Boys: Ride or Die','Adil El Arbi, Bilall Fallah','Will Smith',null,'2024-05-22','Acción/Comedia','Streaming'
+    null,'Bad Boys: Ride or Die','Adil El Arbi, Bilall Fallah','Will Smith',null,'2024-05-22','Acción/Comedia','Streaming'
 );
