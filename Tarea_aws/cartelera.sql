@@ -8,7 +8,7 @@ create table peliculas(
 	director varchar(100) not null,
     actor varchar(100) not null,
 	S3Fotos varchar(255),
-    anio varchar(100) not null,
+    anio datetime not null,
     genero varchar(100) not null,
     formato enum('Streaming','Digital','DVD') not null default 'Streaming'
 )engine innodb;
