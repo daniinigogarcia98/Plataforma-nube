@@ -16,7 +16,7 @@ require_once 'controlador.php';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 
-<body style="background-color:lightblue;">
+<body style="background: linear-gradient(135deg, #FF9900, #FF6600, #0066CC, #333333);">
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="/index.php"> <i class="bi bi-amazon"></i> Plataformas en la Nube(AWS)</a>
@@ -156,10 +156,10 @@ require_once 'controlador.php';
 
 
                 <div class="col-lg-8 col-md-12 col-12">
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-dark table-hover table-bordered">
                         <thead class="table-dark text-center">
                             <tr>
-                                <th scope="col">#</th>
+                                <th scope="col">Id</th>
                                 <th scope="col">Titulo</th>
                                 <th scope="col">Director/es</th>
                                 <th scope="col">Actor</th>
