@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Tareas</title>
+    <!-- Agregar el enlace a Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Cargar Axios -->
+    <script src="axios/axios.min.js"></script>
+    <link rel="icon" href="img/icon.webp"  type="image/x-icon">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Gestión de Tareas</h1>
+
+        <!-- Formulario para crear tarea -->
+        <fieldset class="mt-4">
+            <legend>Crear Nueva Tarea</legend>
+            <form id="formCrearTarea">
+                <div class="mb-3">
+                    <label for="titulo" class="form-label">Título</label>
+                    <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título" required>
+                </div>
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label">Descripción</label>
+                    <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripción" required>
+                </div>
+                <div class="mb-3">
+                    <label for="prioridad" class="form-label">Prioridad</label>
+                    <select class="form-select" id="prioridad" name="prioridad">
+                        <option>Baja</option>
+                        <option>Media</option>
+                        <option>Alta</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="estado" class="form-label">Estado</label>
+                    <select class="form-select" id="estado" name="estado">
+                        <option>Pendiente</option>
+                        <option>Iniciada</option>
+                        <option>Finalizada</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Crear Tarea</button>
+            </form>
+        </fieldset>
+
+        <!-- Lista de Tareas -->
+        <fieldset class="mt-4">
+            <legend>Lista de Tareas</legend>
+            <table class="table table-bordered" id="tablaTareas">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Título</th>
+                        <th>Descripción</th>
+                        <th>Fecha Creación</th>
+                        <th>Prioridad</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se insertarán las tareas -->
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+
+    <!-- Mensajes de éxito y error -->
+    <div id="mensaje" class="alert" style="display:none;"></div>
+
+    <script src="js/script.js"></script> 
+</body>
+</html>
